@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Simon Okomo Aloo | Research Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #f5f2ed;
+  --bg2:      #edeae3;
+  --surface:  #ffffff;
+  --green:    #1e5c3a;
+  --green-mid:#2a7a50;
+  --green-lt: rgba(30,92,58,0.08);
+  --terra:    #c1440e;
+  --terra-lt: rgba(193,68,14,0.10);
+  --text:     #1a1a1a;
+  --text-mid: #444;
+  --text-muted:#777;
+  --border:   rgba(30,92,58,0.18);
+  --border-lt:rgba(30,92,58,0.10);
+  --shadow:   0 2px 16px rgba(0,0,0,0.07);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-lt);
+}
+.nav-id { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: .01em; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+  color: var(--text-mid); text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.nav-cv {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  color: var(--surface); background: var(--green); text-decoration: none;
+  padding: .5rem 1.3rem; transition: background .2s; white-space: nowrap;
+}
+.nav-cv:hover { background: var(--green-mid); }
+.nav-dot { display: none; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 8rem 4rem 5rem;
+  background: var(--bg);
+  position: relative; z-index: 1;
+}
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; }
+.hero-left {}
+.hero-tag {
+  font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+  color: var(--terra); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.hero-tag::before { content: '//'; font-family: monospace; color: var(--terra); }
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700; line-height: 1.05;
+  color: var(--text); margin-bottom: 1.5rem;
+}
+.hero-headline .name-italic { font-style: italic; color: var(--green); display: block; }
+.hero-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem; line-height: 1.8; color: var(--text-mid);
+  max-width: 520px; margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+  padding: .85rem 1.8rem; text-decoration: none;
+  background: var(--terra); color: #fff;
+  transition: background .2s, transform .2s;
+}
+.btn-primary:hover { background: #a33a0c; transform: translateY(-1px); }
+.btn-primary svg { width: 14px; height: 14px; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+  padding: .85rem 1.8rem; text-decoration: none;
+  background: var(--green); color: #fff;
+  transition: background .2s, transform .2s;
+}
+.btn-secondary:hover { background: var(--green-mid); transform: translateY(-1px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+  padding: .85rem 1.8rem; text-decoration: none;
+  border: 1.5px solid var(--border); color: var(--text-mid);
+  transition: border-color .2s, color .2s;
+}
+.btn-outline:hover { border-color: var(--green); color: var(--green); }
+.hero-right { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+.hero-photo {
+  width: 280px; height: 280px; border-radius: 50%; overflow: hidden;
+  border: 5px solid var(--surface);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.hero-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-lt); border: 1px solid var(--border-lt); width: 100%; }
+.metric {
+  background: var(--surface); padding: 1.4rem 1.2rem;
+  transition: background .25s;
+}
+.metric:hover { background: var(--green-lt); }
+.metric-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; font-weight: 600; color: var(--text); display: block; line-height: 1;
+}
+.metric-key {
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text-muted); margin-top: .4rem; display: block;
+}
+.hero-scroll { display: none; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── SECTIONS ── */
+.section { padding: 6rem 4rem; max-width: none; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.sec-num {
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+  color: var(--terra); margin-bottom: .8rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.sec-num::before { content: '//'; font-family: monospace; }
+.sec-num::after { content: ''; flex: 1; height: 1px; background: var(--border-lt); }
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700;
+  line-height: 1.1; margin-bottom: 3rem; color: var(--text);
+}
+.sec-title span { color: var(--green); }
+.sec-title em {
+  display: block; font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 55%; font-weight: 400; color: var(--text-muted); margin-top: .5rem;
+}
+
+/* ── ABOUT ── */
+#about { background: var(--bg2); }
+.about-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: start; }
+.about-text p {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.08rem; line-height: 1.9; color: var(--text-mid); margin-bottom: 1.2rem;
+}
+.skills-list { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.skill-tag {
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  padding: .35rem .85rem; border: 1.5px solid var(--border);
+  color: var(--green); background: var(--green-lt);
+}
+.about-panels { display: flex; flex-direction: column; gap: 1.2rem; }
+.panel {
+  border-left: 3px solid var(--green); padding: 1.5rem 1.5rem 1.5rem 1.8rem;
+  background: var(--surface); box-shadow: var(--shadow);
+  transition: border-color .2s, transform .2s;
+}
+.panel:hover { border-color: var(--terra); transform: translateX(3px); }
+.panel-label {
+  font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600;
+  color: var(--green); margin-bottom: .7rem;
+}
+.panel p { font-family: 'EB Garamond', serif; font-size: .97rem; line-height: 1.75; color: var(--text-mid); }
+.cv-banner {
+  margin: 2rem 0 0; padding: 1.4rem 1.8rem;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+}
+.cv-banner-text { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text-mid); }
+.cv-banner-text strong { color: var(--text); }
+.btn-cv-sm {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+  padding: .6rem 1.4rem; text-decoration: none;
+  background: var(--green); color: #fff; transition: background .2s;
+}
+.btn-cv-sm:hover { background: var(--green-mid); }
+.btn-cv { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; padding: .85rem 1.8rem; text-decoration: none; background: var(--terra); color: #fff; transition: background .2s, transform .2s; }
+.btn-cv:hover { background: #a33a0c; transform: translateY(-1px); }
+.btn-cv svg { width: 14px; height: 14px; }
+.btn-contact { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; padding: .85rem 1.8rem; text-decoration: none; border: 1.5px solid var(--border); color: var(--text-mid); transition: border-color .2s, color .2s; }
+.btn-contact:hover { border-color: var(--green); color: var(--green); }
+
+/* ── EDUCATION ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.edu-card {
+  background: var(--surface); padding: 2rem 1.8rem;
+  border-top: 3px solid var(--green);
+  box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+  transition: box-shadow .25s, transform .25s;
+}
+.edu-card:hover { box-shadow: 0 6px 32px rgba(0,0,0,0.13); transform: translateY(-3px); }
+.edu-card::before {
+  content: attr(data-year); font-family: 'Playfair Display', serif;
+  font-size: 5rem; font-weight: 700; color: rgba(30,92,58,0.05);
+  position: absolute; right: -8px; bottom: -12px; line-height: 1;
+}
+.edu-period { font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--terra); margin-bottom: .9rem; }
+.edu-deg { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin-bottom: .4rem; }
+.edu-uni { font-size: .82rem; color: var(--green); margin-bottom: .8rem; font-weight: 500; }
+.edu-thesis { font-family: 'EB Garamond', serif; font-style: italic; font-size: .9rem; color: var(--text-muted); line-height: 1.6; }
+.edu-gpa { display: inline-block; margin-top: 1rem; font-size: .65rem; letter-spacing: .1em; font-weight: 600; color: var(--terra); }
+
+/* ── PUBLICATIONS ── */
+#publications { background: var(--bg2); }
+.pub-controls { display: flex; gap: .7rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.pub-btn {
+  font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  padding: .5rem 1.2rem; border: 1.5px solid var(--border);
+  background: transparent; color: var(--text-muted); cursor: pointer; transition: all .2s;
+}
+.pub-btn.active, .pub-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-lt); }
+.pub-container { display: flex; flex-direction: column; }
+.pub-row {
+  display: grid; grid-template-columns: 70px 1fr auto;
+  align-items: start; gap: 1.5rem;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--border-lt);
+  transition: background .2s;
+}
+.pub-row:hover { background: var(--green-lt); margin: 0 -1rem; padding: 1.5rem 1rem; }
+.pub-idx { font-size: .65rem; letter-spacing: .1em; color: var(--text-muted); padding-top: .2rem; font-weight: 500; }
+.pub-title-text { font-family: 'EB Garamond', serif; font-size: 1rem; line-height: 1.55; margin-bottom: .4rem; color: var(--text); }
+.pub-authors { font-size: .78rem; color: var(--text-muted); margin-bottom: .3rem; }
+.pub-source { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--green); }
+.pub-year-badge { font-size: .7rem; font-weight: 700; color: var(--surface); background: var(--green); padding: .28rem .7rem; white-space: nowrap; align-self: start; }
+
+/* ── AWARDS ── */
+.awards-bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+.award-tile {
+  background: var(--surface); padding: 2.2rem 1.8rem;
+  box-shadow: var(--shadow); position: relative; overflow: hidden;
+  transition: box-shadow .25s, transform .25s; border-top: 3px solid transparent;
+}
+.award-tile:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.13); transform: translateY(-3px); border-top-color: var(--green); }
+.award-tile.featured { grid-column: span 2; border-top-color: var(--terra); }
+.award-tile.featured:hover { border-top-color: var(--terra); }
+.award-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: rgba(30,92,58,0.08); display: block; line-height: 1; margin-bottom: .5rem; }
+.award-yr { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; color: var(--terra); margin-bottom: .6rem; }
+.award-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; margin-bottom: .8rem; line-height: 1.3; color: var(--text); }
+.award-desc { font-family: 'EB Garamond', serif; font-size: .95rem; line-height: 1.7; color: var(--text-mid); }
+
+/* ── SCHOLARSHIPS ── */
+.scholar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.scholar-card {
+  background: var(--surface); padding: 1.8rem;
+  box-shadow: var(--shadow); border-left: 3px solid var(--border);
+  transition: border-color .2s, transform .2s;
+}
+.scholar-card.highlight { border-left-color: var(--terra); }
+.scholar-card:hover { border-left-color: var(--green); transform: translateX(3px); }
+.scholar-yr { font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--terra); margin-bottom: .5rem; }
+.scholar-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: .7rem; line-height: 1.3; }
+.scholar-body { font-family: 'EB Garamond', serif; font-size: .95rem; line-height: 1.7; color: var(--text-mid); margin-bottom: .8rem; }
+.scholar-badge { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; padding: .25rem .7rem; background: var(--green-lt); color: var(--green); border: 1px solid var(--border); }
+
+/* ── CONFERENCES ── */
+.conf-list { display: flex; flex-direction: column; }
+.conf-row {
+  display: grid; grid-template-columns: 70px 1fr auto;
+  align-items: start; gap: 1.5rem;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--border-lt);
+  transition: background .2s;
+}
+.conf-row:hover { background: var(--green-lt); margin: 0 -1rem; padding: 1.5rem 1rem; }
+.conf-year { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--text-muted); }
+.conf-title { font-family: 'EB Garamond', serif; font-size: 1rem; line-height: 1.5; margin-bottom: .3rem; color: var(--text); }
+.conf-event { font-size: .78rem; color: var(--green); font-weight: 500; margin-bottom: .2rem; }
+.conf-location { font-size: .75rem; color: var(--text-muted); }
+.conf-type { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; padding: .28rem .7rem; background: var(--green); color: #fff; align-self: start; white-space: nowrap; }
+
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; }
+.exp-row {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 3rem; padding: 2rem 0; border-bottom: 1px solid var(--border-lt);
+  align-items: start;
+}
+.exp-side { font-size: .78rem; color: var(--text-muted); line-height: 1.6; font-weight: 500; }
+.exp-role { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+.exp-where { font-size: .82rem; color: var(--green); font-weight: 500; margin-bottom: .8rem; }
+.exp-points { list-style: none; padding: 0; }
+.exp-points li { font-family: 'EB Garamond', serif; font-size: .97rem; color: var(--text-mid); line-height: 1.7; padding-left: 1.2rem; position: relative; margin-bottom: .3rem; }
+.exp-points li::before { content: '—'; position: absolute; left: 0; color: var(--terra); font-size: .8rem; }
+
+/* ── CONNECT ── */
+.connect-intro { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--text-mid); margin-bottom: 2.5rem; max-width: 620px; line-height: 1.8; }
+.social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; }
+.social-card {
+  background: var(--surface); border: 1.5px solid var(--border-lt);
+  padding: 1.8rem; text-decoration: none;
+  display: flex; flex-direction: column; gap: .5rem;
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+  box-shadow: var(--shadow);
+}
+.social-card:hover { border-color: var(--green); box-shadow: 0 6px 24px rgba(0,0,0,0.11); transform: translateY(-3px); }
+.social-platform { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--terra); }
+.social-handle { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--text); }
+.social-stat { font-size: .78rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border-lt); background: var(--bg2);
+  padding: 3.5rem 4rem; display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: center;
+}
+.footer-big { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; color: rgba(30,92,58,0.10); letter-spacing: -.02em; line-height: 1; }
+.footer-info { text-align: right; }
+.footer-email { font-size: .85rem; color: var(--green); margin-bottom: .5rem; display: block; text-decoration: none; font-weight: 500; }
+.footer-email:hover { color: var(--terra); }
+.footer-copy { font-size: .68rem; color: var(--text-muted); letter-spacing: .08em; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 6rem 1.5rem 4rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-right { align-items: flex-start; }
+  .section { padding: 4rem 1.5rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .awards-bento { grid-template-columns: 1fr; }
+  .award-tile.featured { grid-column: span 1; }
+  .exp-row { grid-template-columns: 1fr; gap: .5rem; }
+  .conf-row { grid-template-columns: 60px 1fr; }
+  .conf-type { display: none; }
+  footer { grid-template-columns: 1fr; text-align: center; }
+  .footer-info { text-align: center; }
+  .pub-row { grid-template-columns: 50px 1fr; }
+  .pub-year-badge { display: none; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-id" href="#">Simon Okomo Aloo</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#scholarships">Scholarships</a></li>
+    <li><a href="#conferences">Conferences</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="Simon_Okomo_Aloo_CV.pdf" download class="nav-cv">↓ Download CV</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-tag">Food Scientist · Lipid Biologist · NGO Founder</p>
+      <h1 class="hero-headline">
+        Simon<br>
+        <span class="name-italic">Okomo Aloo</span>
+      </h1>
+      <p class="hero-desc">Monash University PhD Researcher at the Baker Heart and Diabetes Institute. Tracing lipid metabolism to expose genetic drivers of cardiometabolic disease — one stable isotope at a time.</p>
+      <div class="hero-actions">
+        <a href="#publications" class="btn-secondary">View Research</a>
+        <a href="Simon_Okomo_Aloo_CV.pdf" download class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          Download CV
+        </a>
+        <a href="#connect" class="btn-outline">Get in Touch →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo">
+        <img src="Simon.png" alt="Simon Okomo Aloo">
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><span class="metric-val">28</span><span class="metric-key">Publications</span></div>
+        <div class="metric"><span class="metric-val">790</span><span class="metric-key">Citations</span></div>
+        <div class="metric"><span class="metric-val">h15</span><span class="metric-key">H-Index</span></div>
+        <div class="metric"><span class="metric-val">24</span><span class="metric-key">Q1 Articles</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ABOUT -->
+<section class="section" id="about">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 01 — Profile</p>
+  <h2 class="sec-title reveal">About <span>Me</span><br><em>The researcher behind the science</em></h2>
+  <div class="about-layout">
+    <div class="about-text reveal">
+      <p>Simon Aloo earned a Bachelor of Science with First Class Honours in Food Science and Nutrition from Karatina University. As an undergraduate, he was selected for the "Korean Government Program for Young Upcoming African Agricultural Experts" — bringing together 20 outstanding students from across Africa — earning the sole Excellence Award at its conclusion.</p>
+      <p>Awarded the prestigious GKS-G scholarship in 2019, he pursued Korean language study before joining Kangwon National University, where he earned both his MSc and first PhD in Food Science and Biotechnology — receiving Outstanding Academic Achievement awards for both degrees.</p>
+      <p>Now at Monash University's School of Translational Medicine, Alfred Hospital, his research applies stable isotope lipid tracers in cultured human cells to decode genetic regulation of lipid metabolism and cardiometabolic disease. He is also the founder of ACMHR-K, a Kenyan NGO dedicated to cardiometabolic health research and advocacy.</p>
+      <div class="skills-list">
+        <span class="skill-tag">Lipidomics</span>
+        <span class="skill-tag">Metabolomics</span>
+        <span class="skill-tag">Microbiomics</span>
+        <span class="skill-tag">C. elegans Models</span>
+        <span class="skill-tag">Mouse Models</span>
+        <span class="skill-tag">Cell Culture</span>
+        <span class="skill-tag">Stable Isotope Tracing</span>
+        <span class="skill-tag">Scientific Writing</span>
+        <span class="skill-tag">Fermentation</span>
+      </div>
+      <div class="cv-banner reveal">
+        <div class="cv-banner-text"><strong>Curriculum Vitae</strong> — Full academic record, publications &amp; awards</div>
+        <a href="Simon_Okomo_Aloo_CV.pdf" download class="btn-cv-sm">⬇ Download CV</a>
+      </div>
+    </div>
+    <div class="about-panels">
+      <div class="panel reveal">
+        <p class="panel-label">Previous Research</p>
+        <p>Developed probiotic-fermented plant-based foods with therapeutic potential against obesity and obesity-associated neurodegeneration — integrating C. elegans, mouse models, microbiome and metabolomics analyses.</p>
+      </div>
+      <div class="panel reveal">
+        <p class="panel-label">Current Research</p>
+        <p>Developing and applying stable isotope lipid tracer approaches in individualized cultured human cells to uncover genetic regulation of lipid metabolism, identifying genetic drivers of lipid dysregulation in cardiometabolic diseases.</p>
+      </div>
+      <div class="panel reveal">
+        <p class="panel-label">Community Impact</p>
+        <p>Founder &amp; Chairperson of ACMHR-K (Alliance for Cardiometabolic Health &amp; Research – Kenya). Also mentors young Africans in pursuing international scholarships and research careers.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 02 — Academic History</p>
+  <h2 class="sec-title reveal">Edu<span>cation</span><br><em>A pursuit of excellence across continents</em></h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card" data-year="2025">
+      <div class="edu-period">2025 — Present</div>
+      <div class="edu-deg">Doctor of Philosophy</div>
+      <div class="edu-uni">Monash University, Australia</div>
+      <div class="edu-thesis">Tracing lipid metabolism to uncover lipid-mediated cardiometabolic disorder mechanisms</div>
+    </div>
+    <div class="edu-card" data-year="2024">
+      <div class="edu-period">2022 — 2024</div>
+      <div class="edu-deg">PhD — Food Science &amp; Biotechnology</div>
+      <div class="edu-uni">Kangwon National University, Korea</div>
+      <div class="edu-thesis">Ameliorative effects of Pediococcus acidilactici KCTC 15831BP fermented hempseed on obesity and obesity-induced Alzheimer's disease</div>
+      <span class="edu-gpa">GPA 4.32/4.5 · 96%</span>
+    </div>
+    <div class="edu-card" data-year="2022">
+      <div class="edu-period">2020 — 2022</div>
+      <div class="edu-deg">MSc — Food Science &amp; Biotechnology</div>
+      <div class="edu-uni">Kangwon National University, Korea</div>
+      <div class="edu-thesis">Anti-obesity effect of alfalfa sprout fermented with Pediococcus acidilactici in Caenorhabditis elegans model</div>
+      <span class="edu-gpa">GPA 4.49/4.5 · 99%</span>
+    </div>
+    <div class="edu-card" data-year="2018">
+      <div class="edu-period">2014 — 2018</div>
+      <div class="edu-deg">BSc — Food Science &amp; Nutrition</div>
+      <div class="edu-uni">Karatina University, Kenya</div>
+      <div class="edu-thesis">Effects of processing on biochemical profile and proximate composition of tempeh made from lablab bean</div>
+      <span class="edu-gpa">GPA 3.82/4.0 · First Class Honours</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 03 — Research Output</p>
+  <h2 class="sec-title reveal">Publi<span>cations</span><br><em>28 total · 19 first-author · 8 top-10% journals</em></h2>
+  <div class="pub-controls reveal">
+    <button class="pub-btn active" onclick="filterPubs('all',this)">All Works</button>
+    <button class="pub-btn" onclick="filterPubs('first',this)">First Author</button>
+    <button class="pub-btn" onclick="filterPubs('co',this)">Co-Author</button>
+    <button class="pub-btn" onclick="filterPubs('book',this)">Book Chapters</button>
+  </div>
+  <div class="pub-container" id="pubList">
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">01 · FA</span>
+      <div>
+        <div class="pub-title-text">Pediococcus acidilactici KCTC 15831BP-fermented industrial hempseed supplementation corrects metabolite and gut microbiota dysbiosis, potentially mitigating Alzheimer's disease-like symptoms in high-fat diet-fed mice</div>
+        <div class="pub-authors">Aloo, S.O.; Chelliah, R.; Ofosu, F.K.; et al.</div>
+        <div class="pub-source">Food &amp; Function</div>
+      </div>
+      <span class="pub-year-badge">2025</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">02 · FA</span>
+      <div>
+        <div class="pub-title-text">Effects of liquid state vs. solid state lactic fermentation on drying, nutritional composition, phytochemical profile, and in vitro neuro-related bioactivities of Cheungsam industrial hempseed</div>
+        <div class="pub-authors">Aloo, S.O.; Park, S.; Oyinloye, T.M.; et al.</div>
+        <div class="pub-source">Food Bioscience</div>
+      </div>
+      <span class="pub-year-badge">2025</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">03 · FA</span>
+      <div>
+        <div class="pub-title-text">Uncovering the secrets of industrial hemp in food and nutrition: The trends, challenges, and new-age perspectives</div>
+        <div class="pub-authors">Aloo, S.O.; Mwiti, G.; Ngugi, L.W.; Oh, D.H.</div>
+        <div class="pub-source">Critical Reviews in Food Science and Nutrition</div>
+      </div>
+      <span class="pub-year-badge">2024</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">04 · FA</span>
+      <div>
+        <div class="pub-title-text">Polyphenol-rich fermented hempseed ethanol extracts improve obesity, oxidative stress, and neural health in high-glucose diet-induced Caenorhabditis elegans</div>
+        <div class="pub-authors">Aloo, S.O.; Barathikannan, K.; Oh, D.H.</div>
+        <div class="pub-source">Food Chemistry: X</div>
+      </div>
+      <span class="pub-year-badge">2024</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">05 · FA</span>
+      <div>
+        <div class="pub-title-text">Elicitation: a new perspective into plant chemo-diversity and functional property</div>
+        <div class="pub-authors">Aloo, S.O.; Ofosu, F.K.; Oh, D.H.</div>
+        <div class="pub-source">Critical Reviews in Food Science and Nutrition</div>
+      </div>
+      <span class="pub-year-badge">2023</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">06 · FA</span>
+      <div>
+        <div class="pub-title-text">Insights on dietary polyphenols as agents against metabolic disorders: obesity as a target disease</div>
+        <div class="pub-authors">Aloo, S.O.; Ofosu, F.K.; Kim, N.H.; et al.</div>
+        <div class="pub-source">Antioxidants</div>
+      </div>
+      <span class="pub-year-badge">2023</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">07 · FA</span>
+      <div>
+        <div class="pub-title-text">Edible plant sprouts: Health benefits, trends, and opportunities for novel exploration</div>
+        <div class="pub-authors">Aloo, S.O.; Ofosu, F.K.; Kilonzi, S.M.; et al.</div>
+        <div class="pub-source">Nutrients</div>
+      </div>
+      <span class="pub-year-badge">2021</span>
+    </div>
+    <div class="pub-row reveal" data-cat="first">
+      <span class="pub-idx">08 · FA</span>
+      <div>
+        <div class="pub-title-text">UHPLC-ESI-QTOF-MS/MS metabolite profiling of the antioxidant and antidiabetic activities of red cabbage and broccoli seeds and sprouts</div>
+        <div class="pub-authors">Aloo, S.O.; Ofosu, F.K.; Daliri, E.B.M.; Oh, D.H.</div>
+        <div class="pub-source">Antioxidants</div>
+      </div>
+      <span class="pub-year-badge">2021</span>
+    </div>
+    <div class="pub-row reveal" data-cat="co">
+      <span class="pub-idx">19 · CA</span>
+      <div>
+        <div class="pub-title-text">Fermented sorghum improves type 2 diabetes remission by modulating gut microbiota and related metabolites in high fat diet-streptozotocin induced diabetic mice</div>
+        <div class="pub-authors">Ofosu, F.K.; … <strong>Aloo, S.O.</strong>; et al.</div>
+        <div class="pub-source">Journal of Functional Foods</div>
+      </div>
+      <span class="pub-year-badge">2023</span>
+    </div>
+    <div class="pub-row reveal" data-cat="co">
+      <span class="pub-idx">21 · CA</span>
+      <div>
+        <div class="pub-title-text">Unveiling the potential of African fermented cereal-based beverages: Probiotics, functional drinks, health benefits and bioactive components</div>
+        <div class="pub-authors">Gebre, T.S.; … <strong>Aloo, S.O.</strong>; et al.</div>
+        <div class="pub-source">Food Research International</div>
+      </div>
+      <span class="pub-year-badge">2024</span>
+    </div>
+    <div class="pub-row reveal" data-cat="co">
+      <span class="pub-idx">20 · CA</span>
+      <div>
+        <div class="pub-title-text">The potential role of polyphenols in oxidative stress and inflammation induced by gut microbiota in Alzheimer's disease</div>
+        <div class="pub-authors">Shabbir, U.; Tyagi, A.; <strong>Aloo, S.O.</strong>; Oh, D.H.</div>
+        <div class="pub-source">Antioxidants</div>
+      </div>
+      <span class="pub-year-badge">2021</span>
+    </div>
+    <div class="pub-row reveal" data-cat="book">
+      <span class="pub-idx">B1</span>
+      <div>
+        <div class="pub-title-text">Nucleic Acid-Based Rapid Detection of Plant-Associated Cyanobacteria</div>
+        <div class="pub-authors">Aloo, S.O.; Aloo, D.O.; Vijayalakshmi, S.; Oh, D.H.</div>
+        <div class="pub-source">Plant Microbiome Engineering — Springer US</div>
+      </div>
+      <span class="pub-year-badge">2024</span>
+    </div>
+    <div class="pub-row reveal" data-cat="book">
+      <span class="pub-idx">B2</span>
+      <div>
+        <div class="pub-title-text">Identification of Toxic Blooms of Cyanobacteria in Marine Water Habitat</div>
+        <div class="pub-authors">Aloo, S.O.; Aloo, D.O.; Vijayalakshmi, S.; Oh, D.H.</div>
+        <div class="pub-source">Protocols for Cyanobacteria Sampling — Springer Nature Singapore</div>
+      </div>
+      <span class="pub-year-badge">2023</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- AWARDS -->
+<section class="section" id="awards">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 04 — Recognition</p>
+  <h2 class="sec-title reveal">Academic <span>Awards</span><br><em>Excellence recognized across four countries</em></h2>
+  <div class="awards-bento reveal">
+    <div class="award-tile featured">
+      <span class="award-num">01</span>
+      <div class="award-yr">2021 · Korea</div>
+      <div class="award-title">Outstanding Academic Achievement — NIIED</div>
+      <div class="award-desc">Top master's candidate among all Korean Government Scholars (KGSP). Award presented personally by the Deputy Prime Minister of the Republic of Korea — the highest national recognition for international scholars in the program.</div>
+    </div>
+    <div class="award-tile">
+      <span class="award-num">02</span>
+      <div class="award-yr">2022 · Korea</div>
+      <div class="award-title">Outstanding Academic Achievement — KNU</div>
+      <div class="award-desc">Top master's student for the full academic year at Kangwon National University.</div>
+    </div>
+    <div class="award-tile">
+      <span class="award-num">03</span>
+      <div class="award-yr">2018 · Kenya</div>
+      <div class="award-title">Excellence Award — APACA</div>
+      <div class="award-desc">Sole outstanding participant award, 2018 Korean Government Training Program for Young African Agricultural Experts.</div>
+    </div>
+    <div class="award-tile">
+      <span class="award-num">04</span>
+      <div class="award-yr">2020</div>
+      <div class="award-title">Best Speaker's Award</div>
+      <div class="award-desc">Global Youth Leader Exchange Program — TED-style contest on 'COVID-19 and Life Changes.'</div>
+    </div>
+    <div class="award-tile">
+      <span class="award-num">05</span>
+      <div class="award-yr">2024 · Korea</div>
+      <div class="award-title">Outstanding Academic Achievement — PhD</div>
+      <div class="award-desc">Top doctoral candidate at Kangwon National University, awarded at graduation with GPA 4.32/4.5.</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- SCHOLARSHIPS -->
+<section class="section" id="scholarships">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 05 — Funding &amp; Scholarships</p>
+  <h2 class="sec-title reveal">Scholar<span>ships</span><br><em>Fully funded across three countries</em></h2>
+  <div class="scholar-grid reveal">
+    <div class="scholar-card highlight">
+      <div class="scholar-yr">2025 – Present</div>
+      <div class="scholar-name">Monash Graduate Scholarship (MGS)</div>
+      <div class="scholar-body">Competitive full postgraduate research scholarship at Monash University, Australia — covering tuition and stipend for the full PhD candidature.</div>
+      <span class="scholar-badge">Australia · Full Scholarship</span>
+    </div>
+    <div class="scholar-card highlight">
+      <div class="scholar-yr">2025</div>
+      <div class="scholar-name">Australian Government RTP Scholarship</div>
+      <div class="scholar-body">Australian Government Research Training Program Scholarship, University of Wollongong — prestigious nationally competitive award for research excellence.</div>
+      <span class="scholar-badge">Australia · Government</span>
+    </div>
+    <div class="scholar-card highlight">
+      <div class="scholar-yr">2019 – 2022</div>
+      <div class="scholar-name">Korean Government Graduate Scholarship (KGSP)</div>
+      <div class="scholar-body">Prestigious full scholarship for outstanding international graduate scholars. Covered language training, full tuition, living allowance, and research support across MSc studies.</div>
+      <span class="scholar-badge">Korea · Full Scholarship</span>
+    </div>
+    <div class="scholar-card">
+      <div class="scholar-yr">2022 – 2024</div>
+      <div class="scholar-name">BEST-KNU Scholarship</div>
+      <div class="scholar-body">Doctoral research scholarship for exceptional PhD scholars at Kangwon National University — awarded based on academic excellence and research productivity.</div>
+      <span class="scholar-badge">Korea · Doctoral</span>
+    </div>
+    <div class="scholar-card">
+      <div class="scholar-yr">2022 – 2024</div>
+      <div class="scholar-name">BK21 Scholarship</div>
+      <div class="scholar-body">Brain Korea 21 program scholarship — a national initiative to cultivate world-class graduate researchers. Awarded alongside BEST-KNU for dual doctoral funding.</div>
+      <span class="scholar-badge">Korea · National Program</span>
+    </div>
+    <div class="scholar-card">
+      <div class="scholar-yr">2018</div>
+      <div class="scholar-name">GKS-G Training Scholarship</div>
+      <div class="scholar-body">Korean Government training grant for the Young African Agricultural Experts program — awarded to 20 outstanding undergraduate students from across the African continent.</div>
+      <span class="scholar-badge">Kenya / Korea · Competitive</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- CONFERENCES -->
+<section class="section" id="conferences">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 06 — Scientific Meetings</p>
+  <h2 class="sec-title reveal">Confer<span>ences</span><br><em>Presenting research across the globe</em></h2>
+  <div class="conf-list reveal">
+    <div class="conf-row">
+      <div class="conf-year">2024</div>
+      <div>
+        <div class="conf-title">Stable Isotope Lipid Tracer Approaches in Human Cell Models of Cardiometabolic Disease</div>
+        <div class="conf-event">Baker Heart and Diabetes Institute Annual Research Symposium</div>
+        <div class="conf-location">Melbourne, Australia</div>
+      </div>
+      <span class="conf-type">Oral</span>
+    </div>
+    <div class="conf-row">
+      <div class="conf-year">2023</div>
+      <div>
+        <div class="conf-title">Probiotic-Fermented Hempseed as a Functional Food Against Obesity-Associated Neurodegeneration</div>
+        <div class="conf-event">International Conference on Food Science and Technology (ICoFST)</div>
+        <div class="conf-location">Seoul, Republic of Korea</div>
+      </div>
+      <span class="conf-type">Oral</span>
+    </div>
+    <div class="conf-row">
+      <div class="conf-year">2023</div>
+      <div>
+        <div class="conf-title">Gut Microbiota and Metabolomics in Diet-Induced Metabolic Disorders: C. elegans and Mouse Models</div>
+        <div class="conf-event">Korean Society of Food Science and Technology Annual Congress</div>
+        <div class="conf-location">Busan, Republic of Korea</div>
+      </div>
+      <span class="conf-type">Poster</span>
+    </div>
+    <div class="conf-row">
+      <div class="conf-year">2022</div>
+      <div>
+        <div class="conf-title">Anti-Obesity Bioactivities of Alfalfa Sprout Fermented with Pediococcus acidilactici</div>
+        <div class="conf-event">Kangwon National University Graduate Research Symposium</div>
+        <div class="conf-location">Chuncheon, Republic of Korea</div>
+      </div>
+      <span class="conf-type">Oral</span>
+    </div>
+    <div class="conf-row">
+      <div class="conf-year">2021</div>
+      <div>
+        <div class="conf-title">Polyphenol-Rich Sprouts as Antidiabetic and Antioxidant Functional Foods</div>
+        <div class="conf-event">International Symposium on Functional Foods and Bioactive Compounds</div>
+        <div class="conf-location">Online (Virtual)</div>
+      </div>
+      <span class="conf-type">Poster</span>
+    </div>
+    <div class="conf-row">
+      <div class="conf-year">2020</div>
+      <div>
+        <div class="conf-title">COVID-19 and Life Changes: A Scientist's Perspective</div>
+        <div class="conf-event">Global Youth Leader Exchange Program — TED-Style Forum</div>
+        <div class="conf-location">Online (Virtual)</div>
+      </div>
+      <span class="conf-type">Keynote</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 07 — Career</p>
+  <h2 class="sec-title reveal">Profes<span>sional</span><br><em>Experience &amp; Leadership</em></h2>
+  <div class="exp-list">
+    <div class="exp-row reveal">
+      <div class="exp-side">Mar 2026 – Present<br>Melbourne, AU</div>
+      <div>
+        <div class="exp-role">STM Student Mentor</div>
+        <div class="exp-where">Monash University — Science, Technology &amp; Medicine</div>
+        <ul class="exp-points">
+          <li>Peer mentorship to honours students on research and career navigation</li>
+          <li>Fostering inclusive environments and connecting mentees to university resources</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row reveal">
+      <div class="exp-side">2025 – Present<br>Kenya</div>
+      <div>
+        <div class="exp-role">Chairperson &amp; Founder</div>
+        <div class="exp-where">ACMHR-K · <a href="https://acmhr-k.org" target="_blank" style="color:var(--green);text-decoration:none">acmhr-k.org</a></div>
+        <ul class="exp-points">
+          <li>National NGO leadership focused on cardiometabolic disease prevention</li>
+          <li>Driving interdisciplinary research, public health training, and policy advocacy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row reveal">
+      <div class="exp-side">2022 – 2024<br>Republic of Korea</div>
+      <div>
+        <div class="exp-role">Food Technologist</div>
+        <div class="exp-where">Future Biotech Ltd</div>
+        <ul class="exp-points">
+          <li>Industry collaborative research on probiotic and fermented food development</li>
+          <li>Pilot-scale fermentation and process standardization</li>
+          <li>Probiotic formulation development for metabolic health applications</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row reveal">
+      <div class="exp-side">2017<br>Kenya</div>
+      <div>
+        <div class="exp-role">Food Science Intern</div>
+        <div class="exp-where">Kenya Bureau of Standards (KEBS)</div>
+        <ul class="exp-points">
+          <li>Food quality analysis and product standardization activities</li>
+          <li>Laboratory testing for physicochemical properties of food products</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row reveal">
+      <div class="exp-side">2016<br>Kenya</div>
+      <div>
+        <div class="exp-role">Clinical Nutrition Intern</div>
+        <div class="exp-where">Homa-Bay Referral Hospital</div>
+        <ul class="exp-points">
+          <li>Patient nutritional assessments and individualized diet planning</li>
+          <li>Management support for diabetes, hypertension, and malnutrition cases</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- CONNECT -->
+<section class="section" id="connect">
+<div class="section-inner">
+
+  <p class="sec-num reveal">// 08 — Connect</p>
+  <h2 class="sec-title reveal">Find <span>Simon</span><br><em>Across the scientific &amp; social web</em></h2>
+  <p class="connect-intro reveal">Reach out for research collaborations, mentorship enquiries, or scholarship guidance. Simon is active across these platforms.</p>
+  <div class="social-grid reveal">
+    <a class="social-card" href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=simon+okomo+aloo&oq=S" target="_blank">
+      <span class="social-platform">Google Scholar</span>
+      <span class="social-handle">Simon Okomo Aloo</span>
+      <span class="social-stat">790 citations · h-index 15 · full publication search</span>
+    </a>
+    <a class="social-card" href="https://www.researchgate.net/profile/Simon-Aloo?ev=hdr_xprf" target="_blank">
+      <span class="social-platform">ResearchGate</span>
+      <span class="social-handle">Simon Aloo</span>
+      <span class="social-stat">715 citations · Research Interest Score 482.0</span>
+    </a>
+    <a class="social-card" href="https://www.linkedin.com/in/simonaloo" target="_blank">
+      <span class="social-platform">LinkedIn</span>
+      <span class="social-handle">/in/simonaloo</span>
+      <span class="social-stat">Professional network · career updates · collaborations</span>
+    </a>
+    <a class="social-card" href="https://www.facebook.com/mcaloosymo.daktari" target="_blank">
+      <span class="social-platform">Facebook</span>
+      <span class="social-handle">mcaloosymo.daktari</span>
+      <span class="social-stat">Community updates · science outreach · mentorship posts</span>
+    </a>
+    <a class="social-card" href="https://orcid.org/0009-0008-0064-1752" target="_blank">
+      <span class="social-platform">ORCID</span>
+      <span class="social-handle">0009-0008-0064-1752</span>
+      <span class="social-stat">Verified researcher identity · linked publication record</span>
+    </a>
+    <a class="social-card" href="https://acmhr-k.org/" target="_blank">
+      <span class="social-platform">NGO Website</span>
+      <span class="social-handle">ACMHR-K</span>
+      <span class="social-stat">Alliance for Cardiometabolic Health &amp; Research – Kenya</span>
+    </a>
+    <a class="social-card" href="/cdn-cgi/l/email-protection#fa95919597958993979594ba9d979b9396d4999597">
+      <span class="social-platform">Email</span>
+      <span class="social-handle"><span class="__cf_email__" data-cfemail="1877737775776b71757776587f75797174367b7775">[email&#160;protected]</span></span>
+      <span class="social-stat">Collaborations · speaking invitations · mentorship</span>
+    </a>
+    <a class="social-card" href="Simon_Okomo_Aloo_CV.pdf" download>
+      <span class="social-platform">Curriculum Vitae</span>
+      <span class="social-handle">Download CV ⬇</span>
+      <span class="social-stat">Full academic record · publications · awards · experience</span>
+    </a>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <div class="footer-big">Simon Okomo Aloo</div>
+  <div class="footer-info">
+    <a class="footer-email" href="/cdn-cgi/l/email-protection#412e2a2e2c2e32282c2e2f01262c20282d6f222e2c"><span class="__cf_email__" data-cfemail="412e2a2e2c2e32282c2e2f01262c20282d6f222e2c">[email&#160;protected]</span></a>
+    <div class="footer-copy">© 2025 · PhD Researcher · Monash University · Baker Heart &amp; Diabetes Institute</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function filterPubs(cat, btn) {
+  document.querySelectorAll('.pub-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pub-row').forEach(r => {
+    r.style.display = (cat === 'all' || r.dataset.cat === cat) ? 'grid' : 'none';
+  });
+}
+
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+class Particle {
+  constructor() { this.reset(true); }
+  reset(rand) {
+    this.x = rand ? Math.random() * W : (Math.random() > .5 ? 0 : W);
+    this.y = rand ? Math.random() * H : Math.random() * H;
+    this.vx = (Math.random() - .5) * .35;
+    this.vy = (Math.random() - .5) * .35;
+    this.r = Math.random() * 1.3 + .3;
+    this.a = Math.random() * .45 + .1;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset(false);
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0,255,204,${this.a})`;
+    ctx.fill();
+  }
+}
+for (let i = 0; i < 130; i++) particles.push(new Particle());
+(function animate() {
+  ctx.clearRect(0, 0, W, H);
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+    for (let j = i + 1; j < part
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function filterPubs(cat, btn) {
+  document.querySelectorAll('.pub-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pub-row').forEach(r => {
+    r.style.display = (cat === 'all' || r.dataset.cat === cat) ? 'grid' : 'none';
+  });
+}
+</script>
+</body>
+</html>
